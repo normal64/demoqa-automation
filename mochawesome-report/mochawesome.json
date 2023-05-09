@@ -1,0 +1,138 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2023-05-08T12:55:05.019Z",
+    "end": "2023-05-08T12:55:14.396Z",
+    "duration": 9377,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b20dcc41-135f-4095-aeac-655a10a0f240",
+      "title": "",
+      "fullFile": "D:\\Testing\\projects\\demoqa\\test\\registration.js",
+      "file": "\\test\\registration.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "48a3fd8d-d493-4f30-871c-0aab7e78a008",
+          "title": "task for go phptravels",
+          "fullFile": "D:\\Testing\\projects\\demoqa\\test\\registration.js",
+          "file": "\\test\\registration.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook in \"task for go phptravels\"",
+              "fullTitle": "task for go phptravels \"before all\" hook in \"task for go phptravels\"",
+              "timedOut": false,
+              "duration": 1245,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Set up the Selenium WebDriver instance\ndriver = await new Builder().forBrowser(\"chrome\").build();",
+              "err": {},
+              "uuid": "73d48e9f-460c-4dbe-a797-58bc8cb2fe54",
+              "parentUUID": "48a3fd8d-d493-4f30-871c-0aab7e78a008",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after all\" hook in \"task for go phptravels\"",
+              "fullTitle": "task for go phptravels \"after all\" hook in \"task for go phptravels\"",
+              "timedOut": false,
+              "duration": 105,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Quit the WebDriver instance\nawait driver.quit();",
+              "err": {},
+              "uuid": "e2be1beb-4430-44b2-a378-020a09795b0c",
+              "parentUUID": "48a3fd8d-d493-4f30-871c-0aab7e78a008",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "registration",
+              "fullTitle": "task for go phptravels registration",
+              "timedOut": false,
+              "duration": 8020,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Navigate to the webpage\ndriver.get(\"https://demoqa.com/\");\nawait driver.manage().window().maximize();\n//navigation to registration form\nawait driver.wait(\n  until.elementIsVisible(driver.findElement(By.className(\"card\")))\n);\nconst secondElement = await driver.findElement(\n  By.css(\"div.card:nth-child(2)\")\n);\nawait secondElement.click();\nconst registrationFormLink = await driver.findElement(\n  By.xpath(\"//*[contains(text(), 'Practice Form')]\")\n);\nregistrationFormLink.click();\n// Wait until the page URL is \"https://demoqa.com/automation-practice-form\"\nawait driver.wait(\n  until.urlIs(\"https://demoqa.com/automation-practice-form\")\n);\nconst firstName = await driver.findElement(By.id(\"firstName\"));\nawait firstName.sendKeys(\"Demnmnis\");\nconst lastName = await driver.findElement(By.id(\"lastName\"));\nawait lastName.sendKeys(\"Poplavskii\");\nconst emailInput = await driver.findElement(By.id(\"userEmail\"));\nawait emailInput.sendKeys(\"hirethisguy@myspace.com\");\nconst genderInput = await driver.findElement(\n  By.css(\"label[for='gender-radio-1']\")\n);\nawait genderInput.click();\nconst mobilePhoneInput = await driver.findElement(By.id(\"userNumber\"));\nawait mobilePhoneInput.sendKeys(\"43211235677\");\n//picking date of birth\nconst dateOfBirthInput = await driver.findElement(\n  By.id(\"dateOfBirthInput\")\n);\nawait dateOfBirthInput.click();\n//year picking\nconst yearInputDateOfBirthInput = await driver.findElement(\n  By.className(\"react-datepicker__year-select\")\n);\nawait yearInputDateOfBirthInput.click();\nconst SelectedBirthYear = await driver.findElement(\n  By.xpath(\"//*[contains(text(), '2007')]\")\n);\nSelectedBirthYear.click();\nawait yearInputDateOfBirthInput.click();\n//month picking\nconst monthInputDateOfBirthInput = await driver.findElement(\n  By.className(\"react-datepicker__month-select\")\n);\nawait monthInputDateOfBirthInput.click();\nconst SelectedBirthMonth = await driver.findElement(\n  By.xpath(\"//*[contains(text(), 'August')]\")\n);\nawait SelectedBirthMonth.click();\nawait monthInputDateOfBirthInput.click();\n//picking day\nconst dayDateOfBirthInput = await driver.findElement(\n  By.className(\"react-datepicker__day react-datepicker__day--009\")\n);\nawait dayDateOfBirthInput.click();\n//submit form js because div intercepting click by selenium\nconst submitButton = await driver.findElement(By.id(\"submit\"));\nawait driver.executeScript(\"arguments[0].click();\", submitButton);\n // Check if the modal window is displayed\n const isModalWindow = await isModalWindowDisplayed(driver);\n expect(isModalWindow).to.be.true;\n\n // Check if the header contains the expected text\n const headerText = await getModalHeaderText(driver);\n expect(headerText).to.include(\"Thanks for submitting the form\");\n// // Check if the modal window is displayed\n// const modalWindow = await driver.findElement(\n//   By.className(\"modal-dialog modal-lg\")\n// );\n// const isModalWindowDisplayed = await modalWindow.isDisplayed();\n// try {\n//   expect(isModalWindowDisplayed).to.be.true;\n// } catch (error) {\n//   console.log(`error with modal popup`, error);\n// }\n// // Check if the header contains the expected text\n// const headerElement = await driver.findElement(\n//   By.id(\"example-modal-sizes-title-lg\")\n// );\n// const headerText = await headerElement.getText();\n// try {\n//   expect(headerText).to.include(\"Thanks for submitting the form\");\n// } catch (error) {\n//   console.log(`error with displayed module`, error);\n// }",
+              "err": {},
+              "uuid": "3501c1df-29e8-47ae-8cdc-183d610a50b6",
+              "parentUUID": "48a3fd8d-d493-4f30-871c-0aab7e78a008",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "3501c1df-29e8-47ae-8cdc-183d610a50b6"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 8020,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 0
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 0
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}
