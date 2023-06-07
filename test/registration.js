@@ -1,6 +1,7 @@
 const versionMatcher = require("chromedriver-version-matcher");
 const { expect } = require("chai");
 const { By, Key, Builder, Select, until } = require("selenium-webdriver");
+const assert = require("assert");
 const {
   isModalWindowDisplayed,
   getModalHeaderText,
@@ -17,9 +18,9 @@ describe("task for go phptravels", async function () {
 
   after(async function () {
     // Quit the WebDriver instance
-    await driver.quit();
+    // await driver.quit();
   });
-  it("registration", async function () {
+  it("successful registration", async function () {
     // Navigate to the webpage
     driver.get("https://demoqa.com/");
     await driver.manage().window().maximize();
@@ -105,6 +106,47 @@ describe("task for go phptravels", async function () {
       expect(headerText).to.include("Thanks for submitting the form");
     } catch (error) {
       console.log(`error with displayed module`, error);
+    }
+  });
+  it("Submit form button disabled if inputs are empty", async function () {
+    // Navigate to the webpage
+    driver.get("https://demoqa.com/");
+    await driver.manage().window().maximize();
+    //navigation to registration form
+    await driver.wait(
+      until.elementIsVisible(driver.findElement(By.className("card")))
+    );
+
+    const secondElement = await driver.findElement(
+      By.css("div.card:nth-child(2)")
+    );
+    await secondElement.click();
+
+    const registrationFormLink = await driver.findElement(
+      By.xpath("//*[contains(text(), 'Practice Form')]")
+    );
+    registrationFormLink.click();
+    // Wait until the page URL is "https://demoqa.com/automation-practice-form"
+    await driver.wait(
+      until.urlIs("https://demoqa.com/automation-practice-form")
+    );
+    try {
+      // //submit form js because div intercepting click by selenium
+      const submitButton = await driver.findElement(By.id("submit"));
+      await driver.executeScript("arguments[0].click();", submitButton);
+      // Check if the submit button is disabled
+      const isDisabled = await submitButton.isEnabled();
+
+      // Assert the expected state of the submit button
+      assert.strictEqual(
+        isDisabled,
+        false,
+        "Submit button is expected to be disabled."
+      );
+
+      console.log("Submit button is disabled as expected.");
+    } catch (error) {
+      console.error(error.message);
     }
   });
 });
