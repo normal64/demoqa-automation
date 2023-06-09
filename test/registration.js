@@ -18,7 +18,7 @@ describe("task for go phptravels", async function () {
 
   after(async function () {
     // Quit the WebDriver instance
-      await driver.quit();
+    await driver.quit();
   });
   it("successful registration", async function () {
     // Navigate to the webpage
@@ -184,16 +184,74 @@ describe("task for go phptravels", async function () {
     await genderInput.click();
     const mobilePhoneInput = await driver.findElement(By.id("userNumber"));
     await mobilePhoneInput.sendKeys("43211235677");
-     //submit form js because div intercepting click by selenium
-     const submitButton = await driver.findElement(By.id("submit"));
-     await driver.executeScript("arguments[0].click();", submitButton);
-     // Check if the modal window is displayed
-     const isModalWindow = await isModalWindowDisplayed(driver);
-     try {
-       expect(isModalWindow).to.be.true;
-       console.log(`Negative case Submit worked`);
-     } catch (error) {
-       console.log(`error with modal popup`, error);
-     }
+    //submit form js because div intercepting click by selenium
+    const submitButton = await driver.findElement(By.id("submit"));
+    await driver.executeScript("arguments[0].click();", submitButton);
+
+    try {
+      // Check if the modal window is displayed
+      const isModalWindow = await isModalWindowDisplayed(driver);
+      expect(isModalWindow).to.be.true;
+      console.log(
+        `Negative case Submit worked: spacebar in "Name","Surname" inputs `
+      );
+    } catch (error) {
+      console.log(`error with modal popup`, error);
+    }
+  });
+  it("Entering less than 10 digits in 'Mobile' field", async function () {
+    // Navigate to the webpage
+    driver.get("https://demoqa.com/");
+    await driver.manage().window().maximize();
+    //navigation to registration form
+    await driver.wait(
+      until.elementIsVisible(driver.findElement(By.className("card")))
+    );
+
+    const secondElement = await driver.findElement(
+      By.css("div.card:nth-child(2)")
+    );
+    await secondElement.click();
+
+    const registrationFormLink = await driver.findElement(
+      By.xpath("//*[contains(text(), 'Practice Form')]")
+    );
+    registrationFormLink.click();
+    // Wait until the page URL is "https://demoqa.com/automation-practice-form"
+    await driver.wait(
+      until.urlIs("https://demoqa.com/automation-practice-form")
+    );
+    const firstName = await driver.findElement(By.id("firstName"));
+    await firstName.sendKeys("name");
+    await firstName.sendKeys(Key.ENTER);
+
+    const lastName = await driver.findElement(By.id("lastName"));
+    await lastName.sendKeys("surname");
+    await lastName.sendKeys(Key.ENTER);
+    const genderInput = await driver.findElement(
+      By.css("label[for='gender-radio-1']")
+    );
+    await genderInput.click();
+    const mobilePhoneInput = await driver.findElement(By.id("userNumber"));
+    await mobilePhoneInput.sendKeys("43211");
+    //submit form js because div intercepting click by selenium
+    const submitButton = await driver.findElement(By.id("submit"));
+    await driver.executeScript("arguments[0].click();", submitButton);
+
+    try {
+      // Check if the modal window is displayed
+      const isModalWindow = await isModalWindowDisplayed(driver);
+      expect(isModalWindow).to.be.true;
+      console.log(`Negative case Submit worked: short number`);
+    } catch (error) {
+      if (
+        error.name === "NoSuchElementError" &&
+        error.message.includes("Unable to locate element")
+      ) {
+        console.log("Modal window is not displayed. Test failed.");
+      } else {
+        console.log("An error occurred:", error);
+      }
+    }
   });
 });
