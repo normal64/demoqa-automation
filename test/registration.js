@@ -2,23 +2,27 @@ const versionMatcher = require("chromedriver-version-matcher");
 const { expect } = require("chai");
 const { By, Key, Builder, Select, until } = require("selenium-webdriver");
 const assert = require("assert");
+require("chromedriver");
+const LoginPage = require("./helperFunctions/loginPage");
 const {
   isModalWindowDisplayed,
   getModalHeaderText,
 } = require("./helperFunctions/registration-validations");
 
-require("chromedriver");
+
+
 describe("task for go phptravels", async function () {
   let driver;
 
   before(async function () {
     // Set up the Selenium WebDriver instance
     driver = await new Builder().forBrowser("chrome").build();
+    loginPage = new LoginPage(driver);
   });
 
   after(async function () {
     // Quit the WebDriver instance
-    await driver.quit();
+   // await driver.quit();
   });
   it("successful registration", async function () {
     // Navigate to the webpage
@@ -42,15 +46,9 @@ describe("task for go phptravels", async function () {
     await driver.wait(
       until.urlIs("https://demoqa.com/automation-practice-form")
     );
-    const firstName = await driver.findElement(By.id("firstName"));
-    await firstName.sendKeys("Demnmnis");
-
-    const lastName = await driver.findElement(By.id("lastName"));
-    await lastName.sendKeys("Poplavskii");
-
-    const emailInput = await driver.findElement(By.id("userEmail"));
-    await emailInput.sendKeys("hirethisguy@myspace.com");
-
+    
+    loginPage.login("Demnmnis", "Poplavskii","hirethisguy@myspace.com");
+    
     const genderInput = await driver.findElement(
       By.css("label[for='gender-radio-1']")
     );
