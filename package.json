@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "test-registration": "set NODE_ENV=test && mocha --no-timeouts --reporter mochawesome --require mochawesome/register test/registration.js",
-     "test-browserWindows": "set NODE_ENV=test && mocha --no-timeouts --reporter mochawesome --require mochawesome/register test/browserWindows.js"
+     "test-browserWindows": "set NODE_ENV=test && mocha && node -r chromedriver-version-matcher --no-timeouts --reporter mochawesome --require mochawesome/register test/browserWindows.js"
   },
   "author": "",
   "license": "ISC",
