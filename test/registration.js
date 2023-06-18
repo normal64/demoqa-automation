@@ -120,12 +120,6 @@ describe("task for go phptravels", async function () {
     );
     await secondElement.click();
 
-        
-    
-        const secondElement = await driver.findElement(
-          By.css("div.card:nth-child(2)")
-        );
-        await secondElement.click();
 
     const registrationFormLink = await driver.findElement(
       By.xpath("//*[contains(text(), 'Practice Form')]")
