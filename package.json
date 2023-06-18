@@ -5,14 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test-registration": "set NODE_ENV=test && mocha --no-timeouts --reporter mochawesome --require mochawesome/register test/registration.js",
-     "test-browserWindows": "set NODE_ENV=test && mocha && node -r chromedriver-version-matcher --no-timeouts --reporter mochawesome --require mochawesome/register test/browserWindows.js"
+    "test-registration": "set NODE_ENV=test &&  mocha --no-timeouts --reporter mochawesome --require mochawesome/register test/registration.js",
+     "test-browserWindows": "set NODE_ENV=test && mocha --no-timeouts --reporter mochawesome --require mochawesome/register test/browserWindows.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "chai": "^4.3.7",
-    "chromedriver": "113.0.0",
+    "chromedriver": "109.0.0",
     "chromedriver-version-matcher": "^1.1.9",
     "mocha": "^10.2.0",
     "mochawesome": "^7.1.3",
