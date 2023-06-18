@@ -108,7 +108,7 @@ describe("task for go phptravels", async function () {
   });
   it("Submit form button disabled if inputs are empty", async function () {
     // Navigate to the webpage
-    driver.get("https://demoqa.com/");
+    await driver.get("https://demoqa.com/");
     await driver.manage().window().maximize();
     //navigation to registration form
     await driver.wait(
@@ -119,6 +119,13 @@ describe("task for go phptravels", async function () {
       By.css("div.card:nth-child(2)")
     );
     await secondElement.click();
+
+        
+    
+        const secondElement = await driver.findElement(
+          By.css("div.card:nth-child(2)")
+        );
+        await secondElement.click();
 
     const registrationFormLink = await driver.findElement(
       By.xpath("//*[contains(text(), 'Practice Form')]")
