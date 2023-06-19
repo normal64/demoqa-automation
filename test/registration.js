@@ -36,6 +36,7 @@ describe("task for go phptravels", async function () {
     const secondElement = await driver.findElement(
       By.css("div.card:nth-child(2)")
     );
+    await driver.executeScript('arguments[0].scrollIntoView()', secondElement);
     await secondElement.click();
 
     const registrationFormLink = await driver.findElement(
