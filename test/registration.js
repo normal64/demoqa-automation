@@ -118,6 +118,7 @@ describe("task for go phptravels", async function () {
     const secondElement = await driver.findElement(
       By.css("div.card:nth-child(2)")
     );
+    await driver.wait(until.elementIsClickable(secondElement));
     await secondElement.click();
 
 
